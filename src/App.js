@@ -1,25 +1,41 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import { useState } from "react";
+import { useEffect } from "react";
 
-function App() {
+
+function FetchAPI() {
+
+  const [response, setResponse] = useState(null);
+  const [userName, setUserName] = useState(null);
+  console.log("whats username", userName); 
+
+  async function getUser(username) {
+    const resp = await fetch(`https://api.github.com/users/${username}`);
+    return await resp.json();
+  }
+  
+  useEffect( async () => {
+    const user = await getUser(userName);
+    setResponse(user);
+  }, [userName]);  
+  
+  
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+
+      <p>hello</p>
+      <input
+         value={userName}
+         
+        onChange={(e) => setUserName(e.target.value)} 
+      ></input>
+
+        <h1>Name : {response.username}</h1> 
+        <img src={response.avatar_url}>this is the image</img> 
+       <p>Location: {response.location}</p>  
     </div>
   );
 }
 
-export default App;
+
+export default FetchAPI;
