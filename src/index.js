@@ -1,13 +1,22 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import FetchAPI from './App';
+import App from './App';
+import Child from './Child';
+import Child1 from './Child1';
+
+
+
 import reportWebVitals from './reportWebVitals';
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <FetchAPI />
+    <App>
+      <Child />
+      <Child1 />
+    </App>
   </React.StrictMode>
 );
 
